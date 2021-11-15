@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+
+  app1:
+    build: ./app1
+    container_name: app1
+    restart: always
+    environment:
+      - APP_NAME=FLASKAPP1
+    expose:
+      - 8080
+
+  app2:
+    build: ./app2
+    container_name: app2
+    restart: always
+    environment:
+      - APP_NAME=FLASKAPP2
+    expose:
+      - 8081
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - app1
+      - app2
